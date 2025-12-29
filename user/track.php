@@ -29,4 +29,11 @@ if (isset($_GET['tracking'])) {
 <div class="alert alert-danger mt-3">Invalid Tracking Number</div>
 <?php }} ?>
 
-<?php include "../includes/footer.php"; ?>
+<?php include "../includes/footer.php"; ?><?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+include "../includes/auth_check.php"; // Make sure only logged-in users can access
+
+?>
