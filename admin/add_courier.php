@@ -96,4 +96,7 @@ if (isset($_POST['add_courier'])) {
     <button type="submit" name="add_courier" class="btn btn-primary">Add Courier</button>
 </form>
 
+
 <?php include "../includes/footer.php"; ?>
+
+
