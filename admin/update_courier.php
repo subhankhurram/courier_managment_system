@@ -1,4 +1,6 @@
 <?php
+echo "Courier ID from URL: " . ($_GET['id'] ?? 'NOT SET');
+
 /***********************
  * SESSION & SECURITY
  ***********************/
@@ -23,11 +25,11 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'ADMIN') {
 /***********************
  * VALIDATE COURIER ID
  ***********************/
-if (!isset($_GET['courier_id']) || !is_numeric($_GET['courier_id'])) {
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Invalid Courier ID");
 }
 
-$courier_id = (int) $_GET['courier_id'];
+$courier_id = (int) $_GET['id'];
 
 /***********************
  * FETCH COURIER
