@@ -1,8 +1,5 @@
 <?php session_start(); ?>
-<form method="POST" action="auth/login.php">
-    <input type="email" name="email" required placeholder="Email">
-    <input type="password" name="password" required placeholder="Password">
-    <button type="submit">Login</button>
+
     <?php include "includes/header.php"; ?>
 
 <div class="row justify-content-center">
@@ -24,4 +21,3 @@
 
 <?php include "includes/footer.php"; ?>
 
-</form>
