@@ -7,7 +7,7 @@ include "../config/db.php";
 
 // Admin check
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'ADMIN') {
-    die("Access Denied");
+    die("<div class='alert glow-alert alert-danger text-center mt-5 p-3'>Access Denied</div>");
 }
 
 if (isset($_POST['create_bill'])) {
@@ -24,26 +24,24 @@ if (isset($_POST['create_bill'])) {
     mysqli_stmt_store_result($check);
 
     if (mysqli_stmt_num_rows($check) > 0) {
-        header("Location: create_bill.php?error=bill_exists");
+        $_SESSION['bill_error'] = "Bill already exists for this courier!";
+        header("Location: create_bill.php");
         exit;
     }
 
     // Insert bill
-    $stmt = mysqli_prepare($conn, "INSERT INTO bills 
-        (courier_id, amount, payment_mode, created_at)
-        VALUES (?, ?, ?, ?)");
+    $stmt = mysqli_prepare($conn, "INSERT INTO bills (courier_id, amount, payment_mode, created_by, created_at)
+        VALUES (?, ?, ?, ?, NOW())");
 
-    mysqli_stmt_bind_param($stmt, "idsi",
-        $courier_id,
-        $amount,
-        $payment_mode,
-        $created_by
-    );
+    mysqli_stmt_bind_param($stmt, "idsi", $courier_id, $amount, $payment_mode, $created_by);
 
     if (mysqli_stmt_execute($stmt)) {
-        header("Location: create_bill.php?success=1");
+        $_SESSION['bill_success'] = "Bill Generated Successfully ✅";
+        header("Location: create_bill.php");
         exit;
     } else {
-        die("Billing Error: " . mysqli_error($conn));
+        $_SESSION['bill_error'] = "Billing Error: ".mysqli_error($conn);
+        header("Location: create_bill.php");
+        exit;
     }
 }
