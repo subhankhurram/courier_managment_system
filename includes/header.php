@@ -7,92 +7,145 @@ if (session_status() === PHP_SESSION_NONE) {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Courier Management System</title>
+<title>Smart Courier Management System</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Bootstrap -->
+<!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Icons -->
+<!-- Bootstrap Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body{
-    font-family:'Segoe UI',sans-serif;
+/* GENERAL STYLES */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0d0d0d;
+    color: #fff;
+    margin: 0;
 }
 
 /* NAVBAR */
-.navbar{
-    background: linear-gradient(135deg,#667eea,#764ba2);
-    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+.navbar {
+    background-color: #111;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    transition: background-color 0.3s;
+}
+.navbar.sticky-top.scrolled {
+    background-color: #0a0a0a;
 }
 
-.navbar-brand{
-    font-weight:700;
+.navbar-brand {
+    color: #ff4b2b;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
-.nav-link{
-    font-weight:500;
-    margin-left:15px;
+.navbar-nav .nav-link {
+    color: #b0b0b0;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: color 0.3s;
+}
+.navbar-nav .nav-link:hover {
+    color: #ff4b2b;
 }
 
-/* HERO */
-.hero{
-    min-height:100vh;
-    background: linear-gradient(135deg,#667eea,#764ba2);
-    color:#fff;
-    display:flex;
-    align-items:center;
+.btn-accent {
+    background-color: #ff4b2b;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 8px 25px;
+    transition: all 0.3s;
+}
+.btn-accent:hover {
+    background-color: #ff652f;
+    transform: scale(1.05);
 }
 
-.hero h1{ font-size:3rem; font-weight:700; }
-.hero p{ font-size:1.1rem; opacity:.9; }
-
-.btn-main{
-    background:#fff;
-    color:#764ba2;
-    font-weight:600;
-    border-radius:30px;
-    padding:12px 30px;
+.btn-outline-light {
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 30px;
+    padding: 8px 25px;
+    transition: all 0.3s;
+}
+.btn-outline-light:hover {
+    background-color: #ff4b2b;
+    border-color: #ff4b2b;
+    color: #fff;
 }
 
-.btn-outline{
-    border:2px solid #fff;
-    color:#fff;
-    border-radius:30px;
-    padding:12px 30px;
+/* HERO (optional if needed in header) */
+.hero-dark {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    display: flex;
+    align-items: center;
 }
 
-/* FEATURES */
-.features{ padding:80px 0; }
-
-.feature-box{
-    background:#fff;
-    border-radius:16px;
-    padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
-    transition:.3s;
-}
-
-.feature-box:hover{ transform:translateY(-8px); }
-
-/* CTA */
-.cta{
-    background: linear-gradient(135deg,#667eea,#764ba2);
-    color:#fff;
-    padding:80px 0;
+/* RESPONSIVE */
+@media (max-width: 991px) {
+    .navbar-nav .nav-link {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark position-absolute w-100">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top py-3">
   <div class="container">
-    <a class="navbar-brand" href="/courier_managment_system/index.php">🚚 Courier System</a>
-    <div>
-      <a href="/courier_managment_system/auth/login.php" class="btn btn-outline-light btn-sm me-2">Login</a>
-      <a href="/courier_managment_system/auth/register.php" class="btn btn-light btn-sm">Register</a>
+    <a class="navbar-brand" href="/courier_managment_system/index.php">🚚 Cargo Nest</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item">
+          <a class="nav-link" href="/courier_managment_system/index.php">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/courier_managment_system/index.php#features">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/courier_managment_system/index.php#services">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/courier_managment_system/index.php#testimonials">Testimonials</a>
+        </li>
+        <li class="nav-item ms-lg-3">
+          <a href="/courier_managment_system/auth/register.php" class="btn btn-accent">Sign Up</a>
+        </li>
+        <li class="nav-item ms-2">
+          <a href="/courier_managment_system/auth/login.php" class="btn btn-outline-light">Login</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
+
+<!-- Optional: Sticky Navbar Scroll Effect -->
+<script>
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if(window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
