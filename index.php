@@ -1,98 +1,77 @@
-<?php session_start(); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Login | Courier System</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<style>
-body{
-    height:100vh;
-    background: linear-gradient(135deg,#667eea,#764ba2);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family: 'Segoe UI', sans-serif;
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
+include "includes/header.php";
+?>
 
-.login-box{
-    width:360px;
-    background:#ffffff;
-    border-radius:16px;
-    padding:35px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.25);
-    animation: fadeUp .8s ease;
-}
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h1>Smart Courier Management System</h1>
+        <p class="mt-3">
+          Send, track, and manage your parcels with speed, security, and confidence.
+        </p>
+        <div class="mt-4">
+          <a href="auth/register.php" class="btn btn-main me-3">Create Account</a>
+          <a href="auth/login.php" class="btn btn-outline">Login</a>
+        </div>
+      </div>
 
-@keyframes fadeUp{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
-}
+      <div class="col-md-6 text-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/1048/1048316.png"
+             class="img-fluid"
+             style="max-width:380px;">
+      </div>
+    </div>
+  </div>
+</section>
 
-.login-box h3{
-    font-weight:600;
-    margin-bottom:5px;
-}
-
-.login-box p{
-    font-size:14px;
-    color:#6c757d;
-    margin-bottom:25px;
-}
-
-.form-control{
-    height:48px;
-    border-radius:10px;
-}
-
-.form-control:focus{
-    box-shadow:none;
-    border-color:#667eea;
-}
-
-.btn-login{
-    height:48px;
-    border-radius:10px;
-    font-weight:600;
-    background: linear-gradient(135deg,#667eea,#764ba2);
-    border:none;
-}
-
-.btn-login:hover{
-    opacity:.9;
-}
-
-.brand{
-    position:absolute;
-    top:25px;
-    left:30px;
-    color:#fff;
-    font-weight:600;
-    letter-spacing:.5px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="brand">🚚 Courier System</div>
-
-<div class="login-box">
-    <div class="text-center mb-3">
-        <h3>Welcome Back</h3>
-        <p>Login to your account</p>
+<!-- FEATURES -->
+<section class="features">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Why Choose Our System?</h2>
+      <p class="text-muted">Powerful tools for customers and agents</p>
     </div>
 
-    <form method="POST" action="auth/login.php">
-        <input type="email" name="email" class="form-control mb-3" placeholder="Email Address" required>
-        <input type="password" name="password" class="form-control mb-4" placeholder="Password" required>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-box text-center">
+          <i class="bi bi-geo-alt fs-1 text-primary"></i>
+          <h5 class="mt-3">Parcel Tracking</h5>
+          <p class="text-muted">Track shipments in real time.</p>
+        </div>
+      </div>
 
-        <button class="btn btn-login w-100 text-white">Login</button>
-    </form>
-</div>
+      <div class="col-md-4">
+        <div class="feature-box text-center">
+          <i class="bi bi-people fs-1 text-primary"></i>
+          <h5 class="mt-3">User & Agent Roles</h5>
+          <p class="text-muted">Separate dashboards for each role.</p>
+        </div>
+      </div>
 
-</body>
-</html>
+      <div class="col-md-4">
+        <div class="feature-box text-center">
+          <i class="bi bi-shield-check fs-1 text-primary"></i>
+          <h5 class="mt-3">Secure Platform</h5>
+          <p class="text-muted">Encrypted & role-based authentication.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- CTA -->
+<section class="cta text-center">
+  <div class="container">
+    <h2 class="fw-bold">Start Managing Deliveries Today</h2>
+    <p class="mb-4">Create your free account and get started instantly.</p>
+    <a href="auth/register.php" class="btn btn-light btn-lg">Register Now</a>
+  </div>
+</section>
+
+<?php include "includes/footer.php"; ?>
