@@ -66,7 +66,7 @@ include "includes/header.php";
   </div>
 </section>
 
-<!-- SERVICES / BENEFITS -->
+
 <section class="services-dark py-5">
   <div class="container">
     <div class="text-center mb-5">
@@ -99,7 +99,7 @@ include "includes/header.php";
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+
 <section class="testimonials-dark py-5">
   <div class="container">
     <div class="text-center mb-5">
@@ -131,7 +131,7 @@ include "includes/header.php";
   </div>
 </section>
 
-<!-- CTA -->
+
 <section class="cta-dark text-center py-5">
   <div class="container">
     <h2 class="fw-bold text-white">Get Started Today</h2>

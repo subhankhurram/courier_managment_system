@@ -6,128 +6,120 @@ include "../includes/header.php";
 if ($_SESSION['role'] != 'ADMIN') die("Access Denied");
 ?>
 
-<h3 class="text-center display-5 glow-text mb-5">
-    Add New Agent
-</h3>
+<!-- ADD AGENT -->
+<section class="auth-section d-flex align-items-center justify-content-center py-5" style="min-height:85vh;">
 
-<form method="POST" action="../actions/agent_action.php"
-      class="p-5 rounded-4 shadow-lg animated-form"
-      style="max-width:650px;margin:auto;
-             background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);">
+    <div class="auth-box bg-gray-dark p-4 p-md-5 rounded-4 shadow-lg" style="max-width:650px;width:100%;">
 
-    <div class="mb-4">
-        <label class="form-label fw-bold text-info glow-label">Agent Name</label>
-        <input type="text" name="name"
-               class="form-control form-control-lg dark-input"
-               placeholder="Agent Full Name" required>
+        <div class="text-center mb-4">
+            <h3 class="text-white fw-bold">Add New Agent</h3>
+            <p class="text-gray mb-0">Create agent account</p>
+        </div>
+
+        <form method="POST" action="../actions/agent_action.php" class="floating-form">
+
+            <div class="form-floating mb-3">
+                <input type="text" name="name" class="form-control bg-dark text-white border-0"
+                       id="name" placeholder="Agent Name" required>
+                <label for="name">Agent Name</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" name="email" class="form-control bg-dark text-white border-0"
+                       id="email" placeholder="Email" required>
+                <label for="email">Email Address</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" name="phone" class="form-control bg-dark text-white border-0"
+                       id="phone" placeholder="Phone">
+                <label for="phone">Phone Number</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" name="city" class="form-control bg-dark text-white border-0"
+                       id="city" placeholder="City">
+                <label for="city">City</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" name="branch" class="form-control bg-dark text-white border-0"
+                       id="branch" placeholder="Branch">
+                <label for="branch">Branch</label>
+            </div>
+
+            <div class="form-floating mb-4">
+                <input type="password" name="password" class="form-control bg-dark text-white border-0"
+                       id="password" placeholder="Password" required>
+                <label for="password">Password</label>
+            </div>
+
+            <button name="add_agent" class="btn btn-accent w-100 py-2 fw-bold">
+                ➕ Add Agent
+            </button>
+
+        </form>
+
     </div>
+</section>
 
-    <div class="mb-4">
-        <label class="form-label fw-bold text-info glow-label">Email</label>
-        <input type="email" name="email"
-               class="form-control form-control-lg dark-input"
-               placeholder="Email Address" required>
-    </div>
-
-    <div class="mb-4">
-        <label class="form-label fw-bold text-info glow-label">Phone</label>
-        <input type="text" name="phone"
-               class="form-control form-control-lg dark-input"
-               placeholder="Phone Number">
-    </div>
-
-    <div class="mb-4">
-        <label class="form-label fw-bold text-info glow-label">City</label>
-        <input type="text" name="city"
-               class="form-control form-control-lg dark-input"
-               placeholder="City">
-    </div>
-
-    <div class="mb-4">
-        <label class="form-label fw-bold text-info glow-label">Branch</label>
-        <input type="text" name="branch"
-               class="form-control form-control-lg dark-input"
-               placeholder="Branch Name">
-    </div>
-
-    <div class="mb-4">
-        <label class="form-label fw-bold text-info glow-label">Password</label>
-        <input type="password" name="password"
-               class="form-control form-control-lg dark-input"
-               placeholder="Secure Password" required>
-    </div>
-
-    <div class="text-center">
-        <button name="add_agent"
-                class="btn btn-outline-info btn-lg px-5 hover-btn">
-            ➕ Add Agent
-        </button>
-    </div>
-</form>
+<?php include "../includes/footer.php"; ?>
 
 <style>
-/* Page background */
-body{
+/* THEME */
+.auth-section{
     background:linear-gradient(135deg,#000000,#0f2027);
-    min-height:100vh;
-    font-family:'Segoe UI',sans-serif;
+}
+.bg-gray-dark{
+    background:#1f1f1f;
+}
+.text-gray{
+    color:#b0b0b0;
 }
 
-/* Heading glow */
-.glow-text{
-    color:#0dcaf0;
-    text-shadow:0 0 8px #0dcaf0,0 0 25px rgba(13,202,240,.6);
+/* Animation */
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+.auth-box{
+    opacity:0;
+    animation:fadeUp .8s ease forwards;
 }
 
-/* Inputs */
-.dark-input{
-    background:#000;
-    color:#e6f7ff;
-    border:2px solid #0dcaf0;
+/* Floating Inputs */
+.floating-form .form-control{
+    background:#222;
+    color:#fff;
+    height:52px;
     border-radius:14px;
-    padding:14px;
+    padding:1rem .75rem .25rem;
+}
+.floating-form label{
+    color:#888;
     transition:.3s;
 }
-
-.dark-input::placeholder{
-    color:#7fdfff;
+.form-control:focus{
+    box-shadow:none;
+    border:1px solid #ff4b2b;
+    background:#222;
 }
-
-.dark-input:focus{
-    background:#000;
-    color:#fff;
-    border-color:#0dcaf0;
-    box-shadow:0 0 0 .2rem rgba(13,202,240,.25);
-}
-
-/* Hover */
-.dark-input:hover{
-    transform:translateY(-2px);
-}
-
-/* Labels */
-.glow-label{
-    text-shadow:0 0 4px #0dcaf0;
-}
-
-/* Form animation */
-.animated-form{
-    box-shadow:0 0 25px rgba(13,202,240,.5);
-    animation:pulseBorder 3s infinite alternate;
+.form-control:focus + label,
+.form-control:not(:placeholder-shown) + label{
+    color:#ff4b2b;
+    transform:scale(.85) translateY(-1.4rem) translateX(.15rem);
 }
 
 /* Button */
-.hover-btn:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 25px #0dcaf0;
+.btn-accent{
+    background:#ff4b2b;
+    color:#fff;
+    border-radius:30px;
     transition:.3s;
 }
-
-/* Pulse animation */
-@keyframes pulseBorder{
-    0%{box-shadow:0 0 15px #0dcaf0;}
-    100%{box-shadow:0 0 35px #0dcaf0;}
+.btn-accent:hover{
+    background:#ff652f;
+    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(255,75,43,.6);
 }
 </style>
-
-<?php include "../includes/footer.php"; ?>

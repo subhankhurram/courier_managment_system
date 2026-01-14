@@ -1,40 +1,44 @@
 <?php
 include "../includes/auth_check.php";
 include "../config/db.php";
-include "../includes/header.php"; // navbar included
+include "../includes/header.php";
 
-// Fetch stats
+/* Stats */
 $total = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM couriers"))[0];
 $in    = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM couriers WHERE status='IN_TRANSIT'"))[0];
 $del   = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM couriers WHERE status='DELIVERED'"))[0];
 ?>
 
-<!-- HERO DASHBOARD -->
-<section class="hero" style="min-height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding-top:50px; padding-bottom:50px;">
-    <div class="container">
+<!-- ADMIN DASHBOARD -->
+<section class="auth-section d-flex align-items-center justify-content-center py-5"
+         style="min-height:85vh;">
 
-        <h1 class="fw-bold mb-3">🚚 Admin Dashboard</h1>
-        <p class="text-white-50 mb-5">Monitor shipments, manage orders, and get real-time insights.</p>
+    <div class="container text-center">
 
-        <!-- CARDS -->
+        <div class="mb-5">
+            <h1 class="fw-bold text-white mb-2">🚚 Admin Dashboard</h1>
+            <p class="text-gray">
+                Monitor shipments and system activity
+            </p>
+        </div>
+
+        <!-- STATS -->
         <div class="row justify-content-center g-4">
 
-            <!-- Total Shipments -->
             <div class="col-md-3">
                 <div class="neo-card">
-                    <div class="icon-circle bg-gradient-primary">
+                    <div class="icon-circle accent">
                         <i class="bi bi-box-seam"></i>
                     </div>
                     <h6>Total Shipments</h6>
                     <h1><?= $total ?></h1>
-                    <span>Overall records</span>
+                    <span>All records</span>
                 </div>
             </div>
 
-            <!-- In Transit -->
             <div class="col-md-3">
                 <div class="neo-card warning">
-                    <div class="icon-circle bg-gradient-warning">
+                    <div class="icon-circle warning">
                         <i class="bi bi-truck"></i>
                     </div>
                     <h6>In Transit</h6>
@@ -43,82 +47,124 @@ $del   = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM couriers WHER
                 </div>
             </div>
 
-            <!-- Delivered -->
             <div class="col-md-3">
                 <div class="neo-card success">
-                    <div class="icon-circle bg-gradient-success">
+                    <div class="icon-circle success">
                         <i class="bi bi-check-circle"></i>
                     </div>
                     <h6>Delivered</h6>
                     <h1><?= $del ?></h1>
-                    <span>Completed orders</span>
+                    <span>Completed</span>
                 </div>
             </div>
 
         </div>
 
-        <!-- ACTION BUTTONS -->
-        <div class="action-bar mt-5 flex-wrap justify-content-center">
-            <a href="add_courier.php" class="neo-btn primary"><i class="bi bi-plus-circle"></i> Add Shipment</a>
-            <a href="manage_courier.php" class="neo-btn info"><i class="bi bi-kanban"></i> Manage Shipments</a>
-            <a href="reports.php" class="neo-btn success"><i class="bi bi-bar-chart"></i> Reports</a>
+        <!-- ACTIONS -->
+        <div class="action-bar mt-5 d-flex gap-3 justify-content-center flex-wrap">
+
+            <a href="add_courier.php" class="neo-btn accent">
+                <i class="bi bi-plus-circle"></i> Add Shipment
+            </a>
+
+            <a href="manage_courier.php" class="neo-btn info">
+                <i class="bi bi-kanban"></i> Manage Shipments
+            </a>
+
+            <a href="reports.php" class="neo-btn success">
+                <i class="bi bi-bar-chart"></i> Reports
+            </a>
+
         </div>
 
     </div>
 </section>
 
 <style>
-/* =========================
-   DASHBOARD THEME (Index-style)
-========================= */
+/* SAME GLOBAL THEME */
+.auth-section{
+    background:linear-gradient(135deg,#000000,#0f2027);
+}
+.text-gray{
+    color:#b0b0b0;
+}
+
+/* Cards */
 .neo-card{
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    padding: 30px;
-    text-align:center;
-    border:1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 0 25px rgba(0,0,0,0.2);
-    transition:0.4s;
+    background:#1f1f1f;
+    border-radius:22px;
+    padding:32px 25px;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 0 25px rgba(0,0,0,.4);
+    transition:.4s;
 }
 .neo-card:hover{
-    transform: translateY(-8px) scale(1.03);
-    box-shadow:0 0 50px rgba(0,0,0,0.3);
+    transform:translateY(-10px) scale(1.04);
+    box-shadow:0 0 40px rgba(255,75,43,.4);
 }
-
 .neo-card h6{
-    margin-top:15px;
-    font-size:15px;
-    color:#ccc;
+    margin-top:14px;
+    font-size:14px;
+    color:#aaa;
 }
-
 .neo-card h1{
-    font-size:45px;
-    font-weight:700;
+    font-size:44px;
+    font-weight:800;
     color:#fff;
 }
-
 .neo-card span{
-    color:#aaa;
     font-size:13px;
+    color:#888;
 }
 
+/* Icons */
 .icon-circle{
-    width:70px;
-    height:70px;
+    width:72px;
+    height:72px;
     margin:auto;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:32px;
-    margin-bottom:15px;
-    background: linear-gradient(135deg,#667eea,#764ba2);
-    box-shadow:0 0 20px rgba(102,126,234,0.6);
+    font-size:30px;
+    margin-bottom:14px;
+    background:#ff4b2b;
+    box-shadow:0 0 25px rgba(255,75,43,.6);
+}
+.icon-circle.warning{
+    background:#f59e0b;
+    box-shadow:0 0 25px rgba(245,158,11,.6);
+}
+.icon-circle.success{
+    background:#22c55e;
+    box-shadow:0 0 25px rgba(34,197,94,.6);
 }
 
-.icon-circle.bg-gradient-warning{
-    background: linear-gradient(135deg,#fbbf24,#f59e0b);
-    box-shadow:0 0 20px rgba(251,191,36,0.6);
+/* Buttons */
+.neo-btn{
+    padding:14px 26px;
+    border-radius:30px;
+    font-weight:600;
+    text-decoration:none;
+    color:#fff;
+    transition:.3s;
+    display:inline-flex;
+    gap:10px;
+    align-items:center;
 }
-.icon-circle.bg-gradient-succe
+.neo-btn.accent{
+    background:#ff4b2b;
+}
+.neo-btn.info{
+    background:#0dcaf0;
+}
+.neo-btn.success{
+    background:#22c55e;
+}
+.neo-btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 25px rgba(255,255,255,.3);
+}
+</style>
+
+<?php include "../includes/footer.php"; ?>

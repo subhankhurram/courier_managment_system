@@ -1,11 +1,11 @@
 <?php
 if (isset($_GET['success'])) {
-    echo "<div class='alert glow-alert alert-success text-center mb-4'>
+    echo "<div class='alert glow-alert text-center mb-4'>
             ✅ Bill Generated Successfully
           </div>";
 }
 if (isset($_GET['error']) && $_GET['error'] === 'bill_exists') {
-    echo "<div class='alert glow-alert alert-danger text-center mb-4'>
+    echo "<div class='alert glow-alert-danger text-center mb-4'>
             ❌ Bill already exists for this courier
           </div>";
 }
@@ -19,120 +19,139 @@ include "../config/db.php";
 
 /* Admin check */
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'ADMIN') {
-    die("<div class='alert glow-alert alert-danger text-center mt-5'>Access Denied</div>");
+    die("<div class='alert glow-alert-danger text-center mt-5'>Access Denied</div>");
 }
 ?>
 
-<h3 class="text-center display-5 glow-text mb-5">Generate Bill</h3>
+<!-- GENERATE BILL -->
+<section class="auth-section d-flex align-items-center justify-content-center py-5" style="min-height:85vh;">
 
-<form method="POST" action="billing_action.php"
-      class="p-5 rounded-4 animated-form"
-      style="max-width:650px;margin:auto;">
+    <div class="auth-box bg-gray-dark p-4 p-md-5 rounded-4 shadow-lg"
+         style="max-width:650px;width:100%;">
 
-    <div class="mb-4">
-        <label class="form-label glow-label">Select Courier</label>
-        <select name="courier_id" class="form-select form-select-lg dark-input" required>
-            <option value="">Select Courier</option>
-            <?php
-            $q = mysqli_query($conn,"SELECT courier_id,tracking_number FROM couriers");
-            while($row=mysqli_fetch_assoc($q)){
-                echo "<option value='{$row['courier_id']}'>
-                        {$row['tracking_number']}
-                      </option>";
-            }
-            ?>
-        </select>
+        <div class="text-center mb-4">
+            <h3 class="text-white fw-bold">Generate Bill</h3>
+            <p class="text-gray mb-0">Create courier billing</p>
+        </div>
+
+        <form method="POST" action="billing_action.php" class="floating-form">
+
+            <div class="form-floating mb-3">
+                <select name="courier_id"
+                        class="form-select bg-dark text-white border-0"
+                        id="courier" required>
+                    <option value="">Select Courier</option>
+                    <?php
+                    $q = mysqli_query($conn,"SELECT courier_id,tracking_number FROM couriers");
+                    while($row=mysqli_fetch_assoc($q)){
+                        echo "<option value='{$row['courier_id']}'>
+                                {$row['tracking_number']}
+                              </option>";
+                    }
+                    ?>
+                </select>
+                <label for="courier">Courier Tracking #</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="number" name="amount"
+                       class="form-control bg-dark text-white border-0"
+                       id="amount" placeholder="Amount" required>
+                <label for="amount">Amount</label>
+            </div>
+
+            <div class="form-floating mb-4">
+                <select name="payment_mode"
+                        class="form-select bg-dark text-white border-0"
+                        id="payment" required>
+                    <option value="CASH">Cash</option>
+                    <option value="ONLINE">Online</option>
+                </select>
+                <label for="payment">Payment Mode</label>
+            </div>
+
+            <button name="create_bill"
+                    class="btn btn-accent w-100 py-2 fw-bold">
+                🧾 Generate Bill
+            </button>
+
+        </form>
+
     </div>
+</section>
 
-    <div class="mb-4">
-        <label class="form-label glow-label">Amount</label>
-        <input type="number" name="amount"
-               class="form-control form-control-lg dark-input"
-               placeholder="Enter Amount" required>
-    </div>
-
-    <div class="mb-4">
-        <label class="form-label glow-label">Payment Mode</label>
-        <select name="payment_mode"
-                class="form-select form-select-lg dark-input" required>
-            <option value="CASH">Cash</option>
-            <option value="ONLINE">Online</option>
-        </select>
-    </div>
-
-    <div class="text-center">
-        <button name="create_bill"
-                class="btn btn-outline-info btn-lg px-5 hover-btn">
-            🧾 Generate Bill
-        </button>
-    </div>
-</form>
+<?php include "../includes/footer.php"; ?>
 
 <style>
-/* Page background */
-body{
-    background:linear-gradient(135deg,#000,#0f2027);
-    min-height:100vh;
-    font-family:'Segoe UI',sans-serif;
+/* SAME GLOBAL THEME */
+.auth-section{
+    background:linear-gradient(135deg,#000000,#0f2027);
+}
+.bg-gray-dark{
+    background:#1f1f1f;
+}
+.text-gray{
+    color:#b0b0b0;
 }
 
-/* Headings */
-.glow-text{
-    color:#0dcaf0;
-    text-shadow:0 0 10px #0dcaf0,0 0 30px rgba(13,202,240,.6);
+/* Animation */
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+.auth-box{
+    opacity:0;
+    animation:fadeUp .8s ease forwards;
 }
 
-/* Labels */
-.glow-label{
-    color:#0dcaf0;
-    text-shadow:0 0 4px #0dcaf0;
-    font-weight:600;
-}
-
-/* Inputs */
-.dark-input{
-    background:#000;
-    color:#e8faff;
-    border:2px solid #0dcaf0;
+/* Floating Inputs */
+.floating-form .form-control,
+.floating-form .form-select{
+    background:#222;
+    color:#fff;
+    height:52px;
     border-radius:14px;
-    padding:14px;
+    padding:1rem .75rem .25rem;
+}
+.floating-form label{
+    color:#888;
     transition:.3s;
 }
-.dark-input:focus{
-    background:#000;
-    box-shadow:0 0 0 .25rem rgba(13,202,240,.25);
+.form-control:focus,
+.form-select:focus{
+    box-shadow:none;
+    border:1px solid #ff4b2b;
+    background:#222;
 }
-.dark-input:hover{
-    transform:translateY(-2px);
-    box-shadow:0 6px 20px rgba(13,202,240,.4);
-}
-
-/* Form card */
-.animated-form{
-    background:#000;
-    box-shadow:0 0 30px rgba(13,202,240,.5);
-    animation:pulse 3s infinite alternate;
+.form-control:focus + label,
+.form-control:not(:placeholder-shown) + label,
+.form-select:focus + label{
+    color:#ff4b2b;
+    transform:scale(.85) translateY(-1.4rem) translateX(.15rem);
 }
 
 /* Button */
-.hover-btn:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 25px #0dcaf0,0 0 50px rgba(13,202,240,.4);
+.btn-accent{
+    background:#ff4b2b;
+    color:#fff;
+    border-radius:30px;
+    transition:.3s;
+}
+.btn-accent:hover{
+    background:#ff652f;
+    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(255,75,43,.6);
 }
 
 /* Alerts */
 .glow-alert{
     background:#000;
-    color:#0dcaf0;
-    border:2px solid #0dcaf0;
-    box-shadow:0 0 20px rgba(13,202,240,.5);
+    color:#ff4b2b;
+    border:2px solid #ff4b2b;
 }
-
-/* Animation */
-@keyframes pulse{
-    from{box-shadow:0 0 15px #0dcaf0;}
-    to{box-shadow:0 0 35px #0dcaf0;}
+.glow-alert-danger{
+    background:#000;
+    color:#ff4b2b;
+    border:2px solid #ff4b2b;
 }
 </style>
-
-<?php include "../includes/footer.php"; ?>

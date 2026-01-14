@@ -40,133 +40,176 @@ if (isset($_POST['add_courier'])) {
         $expected_delivery,$created_by);
 
     if (mysqli_stmt_execute($stmt)) {
-        echo "<div class='alert alert-success glow-alert text-center'>
-                ✅ Courier Added | Tracking: <b>$tracking_number</b>
+        echo "<div class='alert glow-alert text-center my-4'>
+                ✅ Courier Added Successfully<br>
+                <b>Tracking #: $tracking_number</b>
               </div>";
     } else {
-        echo "<div class='alert alert-danger glow-alert text-center'>
+        echo "<div class='alert glow-alert-danger text-center my-4'>
                 ❌ Error occurred
               </div>";
     }
 }
 ?>
 
-<h3 class="text-center display-5 glow-text mb-5">Add New Courier</h3>
+<!-- ADD COURIER -->
+<section class="auth-section d-flex align-items-center justify-content-center py-5" style="min-height:85vh;">
 
-<form method="POST" class="p-5 rounded-4 animated-form" style="max-width:720px;margin:auto;">
+    <div class="auth-box bg-gray-dark p-4 p-md-5 rounded-4 shadow-lg"
+         style="max-width:750px;width:100%;">
 
-    <div class="mb-4">
-        <label class="form-label glow-label">Sender (Customer)</label>
-        <select name="sender_id" class="form-select form-select-lg dark-input" required>
-            <option value="">Select Customer</option>
-            <?php
-            $customers = mysqli_query($conn,"SELECT * FROM customers");
-            while($c=mysqli_fetch_assoc($customers)){
-                echo "<option value='{$c['customer_id']}'>{$c['name']} - {$c['phone']}</option>";
-            }
-            ?>
-        </select>
+        <div class="text-center mb-4">
+            <h3 class="text-white fw-bold">Add New Courier</h3>
+            <p class="text-gray mb-0">Create courier booking</p>
+        </div>
+
+        <form method="POST" class="floating-form">
+
+            <div class="form-floating mb-3">
+                <select name="sender_id"
+                        class="form-select bg-dark text-white border-0"
+                        id="sender" required>
+                    <option value="">Select Customer</option>
+                    <?php
+                    $customers = mysqli_query($conn,"SELECT * FROM customers");
+                    while($c=mysqli_fetch_assoc($customers)){
+                        echo "<option value='{$c['customer_id']}'>
+                                {$c['name']} — {$c['phone']}
+                              </option>";
+                    }
+                    ?>
+                </select>
+                <label for="sender">Sender (Customer)</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" name="receiver_name"
+                       class="form-control bg-dark text-white border-0"
+                       id="receiver_name" placeholder="Receiver Name" required>
+                <label for="receiver_name">Receiver Name</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" name="receiver_phone"
+                       class="form-control bg-dark text-white border-0"
+                       id="receiver_phone" placeholder="Receiver Phone" required>
+                <label for="receiver_phone">Receiver Phone</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <textarea name="receiver_address"
+                          class="form-control bg-dark text-white border-0"
+                          id="receiver_address"
+                          placeholder="Receiver Address"
+                          style="height:90px" required></textarea>
+                <label for="receiver_address">Receiver Address</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" name="courier_type"
+                       class="form-control bg-dark text-white border-0"
+                       id="courier_type" placeholder="Courier Type" required>
+                <label for="courier_type">Courier Type</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" name="courier_company"
+                       class="form-control bg-dark text-white border-0"
+                       id="courier_company" placeholder="Courier Company" required>
+                <label for="courier_company">Courier Company</label>
+            </div>
+
+            <div class="form-floating mb-4">
+                <input type="date" name="expected_delivery"
+                       class="form-control bg-dark text-white border-0"
+                       id="expected_delivery" required>
+                <label for="expected_delivery">Expected Delivery</label>
+            </div>
+
+            <button name="add_courier" class="btn btn-accent w-100 py-2 fw-bold">
+                ➕ Add Courier
+            </button>
+
+        </form>
+
     </div>
+</section>
 
-    <div class="mb-3">
-        <label class="form-label glow-label">Receiver Name</label>
-        <input type="text" name="receiver_name" class="form-control form-control-lg dark-input" required>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label glow-label">Receiver Phone</label>
-        <input type="text" name="receiver_phone" class="form-control form-control-lg dark-input" required>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label glow-label">Receiver Address</label>
-        <textarea name="receiver_address" rows="3" class="form-control form-control-lg dark-input" required></textarea>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label glow-label">Courier Type</label>
-        <input type="text" name="courier_type" class="form-control form-control-lg dark-input" required>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label glow-label">Courier Company</label>
-        <input type="text" name="courier_company" class="form-control form-control-lg dark-input" required>
-    </div>
-
-    <div class="mb-4">
-        <label class="form-label glow-label">Expected Delivery</label>
-        <input type="date" name="expected_delivery" class="form-control form-control-lg dark-input" required>
-    </div>
-
-    <div class="text-center">
-        <button name="add_courier" class="btn btn-outline-info btn-lg px-5 hover-btn">
-            ➕ Add Courier
-        </button>
-    </div>
-</form>
+<?php include "../includes/footer.php"; ?>
 
 <style>
-body{
-    background:linear-gradient(135deg,#000,#0f2027);
-    min-height:100vh;
-    font-family:'Segoe UI',sans-serif;
+/* SAME THEME AS ADD AGENT */
+.auth-section{
+    background:linear-gradient(135deg,#000000,#0f2027);
+}
+.bg-gray-dark{
+    background:#1f1f1f;
+}
+.text-gray{
+    color:#b0b0b0;
 }
 
-/* Heading */
-.glow-text{
-    color:#0dcaf0;
-    text-shadow:0 0 10px #0dcaf0,0 0 30px rgba(13,202,240,.6);
+/* Animation */
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+.auth-box{
+    opacity:0;
+    animation:fadeUp .8s ease forwards;
 }
 
-/* Inputs */
-.dark-input{
-    background:#000;
-    color:#e8faff;
-    border:2px solid #0dcaf0;
+/* Floating Inputs */
+.floating-form .form-control,
+.floating-form .form-select{
+    background:#222;
+    color:#fff;
+    height:52px;
     border-radius:14px;
-    padding:14px;
+    padding:1rem .75rem .25rem;
+}
+.floating-form textarea.form-control{
+    height:auto;
+}
+.floating-form label{
+    color:#888;
     transition:.3s;
 }
-.dark-input:focus{
-    background:#000;
-    box-shadow:0 0 0 .25rem rgba(13,202,240,.25);
+.form-control:focus,
+.form-select:focus{
+    box-shadow:none;
+    border:1px solid #ff4b2b;
+    background:#222;
 }
-.dark-input:hover{
-    transform:translateY(-2px);
-}
-
-/* Labels */
-.glow-label{
-    color:#0dcaf0;
-    text-shadow:0 0 4px #0dcaf0;
-}
-
-/* Form */
-.animated-form{
-    background:#000;
-    box-shadow:0 0 30px rgba(13,202,240,.5);
-    animation:pulse 3s infinite alternate;
+.form-control:focus + label,
+.form-control:not(:placeholder-shown) + label,
+.form-select:focus + label{
+    color:#ff4b2b;
+    transform:scale(.85) translateY(-1.4rem) translateX(.15rem);
 }
 
 /* Button */
-.hover-btn:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 25px #0dcaf0;
+.btn-accent{
+    background:#ff4b2b;
+    color:#fff;
+    border-radius:30px;
+    transition:.3s;
+}
+.btn-accent:hover{
+    background:#ff652f;
+    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(255,75,43,.6);
 }
 
 /* Alerts */
 .glow-alert{
     background:#000;
-    color:#0dcaf0;
-    border:2px solid #0dcaf0;
-    box-shadow:0 0 20px rgba(13,202,240,.5);
+    color:#ff4b2b;
+    border:2px solid #ff4b2b;
 }
-
-/* Animation */
-@keyframes pulse{
-    from{box-shadow:0 0 15px #0dcaf0;}
-    to{box-shadow:0 0 35px #0dcaf0;}
+.glow-alert-danger{
+    background:#000;
+    color:#ff4b2b;
+    border:2px solid #ff4b2b;
 }
 </style>
-
-<?php include "../includes/footer.php"; ?>
