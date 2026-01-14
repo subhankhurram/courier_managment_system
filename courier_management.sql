@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2025 at 12:24 PM
+-- Generation Time: Jan 14, 2026 at 01:41 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -35,6 +35,13 @@ CREATE TABLE `agents` (
   `from_location` varchar(50) DEFAULT NULL,
   `to_location` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `agents`
+--
+
+INSERT INTO `agents` (`agent_id`, `user_id`, `city`, `branch`, `from_location`, `to_location`) VALUES
+(1, 3, 'karachi', 'nn', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -73,6 +80,14 @@ CREATE TABLE `couriers` (
   `branch` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `couriers`
+--
+
+INSERT INTO `couriers` (`courier_id`, `tracking_number`, `sender_id`, `receiver_name`, `receiver_phone`, `receiver_address`, `courier_type`, `courier_company`, `booking_date`, `expected_delivery`, `status`, `created_by`, `branch`) VALUES
+(1, 'TRKD16FAD9C11', 1, 'talha', '123456', 'north nazimabad', 'parcel', 'cargonest', '2026-01-12', '2026-01-22', 'DELIVERED', 3, 'nn'),
+(2, 'TRK20260114123645796', 1, 'Subhan Khurram', '12345678990', 'Ghouri palace north nazimabad block h karachi', 'parcel', 'none', NULL, '2026-01-20', 'BOOKED', 1, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -88,6 +103,13 @@ CREATE TABLE `customers` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`customer_id`, `name`, `phone`, `email`, `address`, `created_at`) VALUES
+(1, 'Subhan Khurram', '1234567890', 'subhankhurram0316@gmail.com', NULL, '2026-01-12 10:37:06');
+
 -- --------------------------------------------------------
 
 --
@@ -102,6 +124,13 @@ CREATE TABLE `shipment_tracking` (
   `remarks` text DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `shipment_tracking`
+--
+
+INSERT INTO `shipment_tracking` (`tracking_id`, `courier_id`, `status`, `location`, `remarks`, `updated_at`) VALUES
+(1, 1, 'BOOKED', 'nn', 'Courier Booked', '2026-01-12 10:42:42');
 
 -- --------------------------------------------------------
 
@@ -136,6 +165,15 @@ CREATE TABLE `users` (
   `status` tinyint(4) DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `role`, `name`, `email`, `phone`, `password`, `city`, `branch`, `status`, `created_at`) VALUES
+(1, 'ADMIN', 'admin', 'admin@gmail.com', '123456', '$2y$10$rOFhbvsWRq4HQeXZp5CkgujfOf5b27u4nmPKu987T8lCFN6g81qRa', 'karachi', 'admin', 1, '2026-01-12 10:35:46'),
+(2, 'CUSTOMER', 'Subhan Khurram', 'subhankhurram0316@gmail.com', '1234567890', '$2y$10$m/lvVjaPu6pmR0oqSX.yOuXuWVfIg/rymlwbjc.NJGP09hNfrmfGG', '-- Select --', NULL, 1, '2026-01-12 10:37:06'),
+(3, 'AGENT', 'talha khan', 'talha@123gmail.com', '1234567890', '$2y$10$XOWtCjUIgkgZkeANs8wNheUJvuT6AXknhvoJTFvZvOgaiB4mTzVqu', 'karachi', 'nn', 1, '2026-01-12 10:40:24');
 
 --
 -- Indexes for dumped tables
@@ -203,7 +241,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `agents`
 --
 ALTER TABLE `agents`
-  MODIFY `agent_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `agent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `bills`
@@ -215,19 +253,19 @@ ALTER TABLE `bills`
 -- AUTO_INCREMENT for table `couriers`
 --
 ALTER TABLE `couriers`
-  MODIFY `courier_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `courier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `shipment_tracking`
 --
 ALTER TABLE `shipment_tracking`
-  MODIFY `tracking_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tracking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sms_logs`
@@ -239,7 +277,7 @@ ALTER TABLE `sms_logs`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

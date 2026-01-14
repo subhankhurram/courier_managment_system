@@ -152,4 +152,3 @@ window.addEventListener('scroll', function() {
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-bhai meri baat suno jb hum login kreingein to sirf logot hi nzr ana chaiye us  
