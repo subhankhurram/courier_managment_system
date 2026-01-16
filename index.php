@@ -10,7 +10,8 @@ include "includes/header.php";
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-6">
-        <h1 class="display-4 fw-bold text-white">Smart Courier Management System</h1>
+       <h1 class="display-4 fw-bold text-white">Cargo Nest</h1>
+
         <p class="lead text-gray mt-3">
           Send, track, and manage your parcels efficiently, securely, and instantly.
         </p>

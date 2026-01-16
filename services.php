@@ -1,6 +1,6 @@
 <?php
-include "includes/auth_check.php";
-include "includes/header.php";
+include "../includes/auth_check.php";
+include "../includes/header.php";
 ?>
 
 <section class="auth-section py-5" style="min-height:85vh;">
@@ -14,48 +14,48 @@ include "includes/header.php";
         <div class="row g-4 justify-content-center">
 
             <div class="col-md-3">
-                <a href="add_courier.php" class="service-card accent">
-                    <div class="icon-circle"><i class="bi bi-truck"></i></div>
+                <a href="add_courier.php" class="service-card">
+                    <div class="icon-circle accent"><i class="bi bi-truck"></i></div>
                     <h5>Courier Booking</h5>
                     <p>Create new shipments quickly</p>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a href="manage_courier.php" class="service-card info">
-                    <div class="icon-circle"><i class="bi bi-kanban"></i></div>
+                <a href="manage_courier.php" class="service-card">
+                    <div class="icon-circle info"><i class="bi bi-kanban"></i></div>
                     <h5>Shipment Management</h5>
                     <p>Track, update, or delete shipments</p>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a href="billing.php" class="service-card success">
-                    <div class="icon-circle"><i class="bi bi-cash-stack"></i></div>
+                <a href="billing.php" class="service-card">
+                    <div class="icon-circle success"><i class="bi bi-cash-stack"></i></div>
                     <h5>Billing</h5>
                     <p>Generate invoices and bills</p>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a href="reports.php" class="service-card danger">
-                    <div class="icon-circle"><i class="bi bi-bar-chart"></i></div>
+                <a href="reports.php" class="service-card">
+                    <div class="icon-circle danger"><i class="bi bi-bar-chart"></i></div>
                     <h5>Reports & Analytics</h5>
                     <p>Monitor business performance</p>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a href="agents.php" class="service-card accent">
-                    <div class="icon-circle"><i class="bi bi-person-badge"></i></div>
+                <a href="agents.php" class="service-card">
+                    <div class="icon-circle accent"><i class="bi bi-person-badge"></i></div>
                     <h5>Agent Services</h5>
                     <p>Manage agent accounts and tasks</p>
                 </a>
             </div>
 
             <div class="col-md-3">
-                <a href="manage_customers.php" class="service-card info">
-                    <div class="icon-circle"><i class="bi bi-people"></i></div>
+                <a href="manage_customers.php" class="service-card">
+                    <div class="icon-circle info"><i class="bi bi-people"></i></div>
                     <h5>Customer Support</h5>
                     <p>Manage customers & communication</p>
                 </a>
@@ -69,6 +69,8 @@ include "includes/header.php";
 .auth-section{
     background: linear-gradient(135deg,#000000,#0f2027);
 }
+
+/* Text */
 .text-gray{color:#b0b0b0}
 
 /* Service Cards */
@@ -86,6 +88,7 @@ include "includes/header.php";
 }
 .service-card:hover{
     transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 0 40px rgba(255,75,43,0.5);
 }
 
 /* Icons */
@@ -101,43 +104,31 @@ include "includes/header.php";
     transition:0.4s;
 }
 
-/* Neon Glow Colors */
-.service-card.accent .icon-circle{background:#ff4b2b;}
-.service-card.info .icon-circle{background:#0dcaf0;}
-.service-card.success .icon-circle{background:#22c55e;}
-.service-card.danger .icon-circle{background:#dc3545;}
-
-/* Card Glow on Hover per type */
-.service-card.accent:hover .icon-circle{
-    animation: glowPulseAccent 1.5s infinite alternate;
-}
-.service-card.info:hover .icon-circle{
-    animation: glowPulseInfo 1.5s infinite alternate;
-}
-.service-card.success:hover .icon-circle{
-    animation: glowPulseSuccess 1.5s infinite alternate;
-}
-.service-card.danger:hover .icon-circle{
-    animation: glowPulseDanger 1.5s infinite alternate;
+/* Glow animation on hover */
+.service-card:hover .icon-circle{
+    animation: glowPulse 1.5s infinite alternate;
 }
 
-/* Glow Animations */
-@keyframes glowPulseAccent {
-    0% {box-shadow:0 0 15px #ff4b2b,0 0 30px rgba(255,75,43,0.6);transform:scale(1);}
-    100% {box-shadow:0 0 30px #ff4b2b,0 0 50px rgba(255,75,43,0.8);transform:scale(1.1);}
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 15px rgba(255,255,255,0.3),
+                    0 0 25px rgba(255,75,43,0.4),
+                    0 0 35px rgba(255,75,43,0.5);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 0 25px rgba(255,255,255,0.5),
+                    0 0 40px rgba(255,75,43,0.7),
+                    0 0 60px rgba(255,75,43,0.9);
+        transform: scale(1.1);
+    }
 }
-@keyframes glowPulseInfo {
-    0% {box-shadow:0 0 15px #0dcaf0,0 0 30px rgba(13,202,240,0.6);transform:scale(1);}
-    100% {box-shadow:0 0 30px #0dcaf0,0 0 50px rgba(13,202,240,0.8);transform:scale(1.1);}
-}
-@keyframes glowPulseSuccess {
-    0% {box-shadow:0 0 15px #22c55e,0 0 30px rgba(34,197,94,0.6);transform:scale(1);}
-    100% {box-shadow:0 0 30px #22c55e,0 0 50px rgba(34,197,94,0.8);transform:scale(1.1);}
-}
-@keyframes glowPulseDanger {
-    0% {box-shadow:0 0 15px #dc3545,0 0 30px rgba(220,53,69,0.6);transform:scale(1);}
-    100% {box-shadow:0 0 30px #dc3545,0 0 50px rgba(220,53,69,0.8);transform:scale(1.1);}
-}
+
+/* Icon Colors */
+.icon-circle.accent{background:#ff4b2b;}
+.icon-circle.success{background:#22c55e;}
+.icon-circle.info{background:#0dcaf0;}
+.icon-circle.danger{background:#dc3545;}
 
 /* Card Text */
 .service-card h5{
@@ -156,4 +147,4 @@ include "includes/header.php";
 }
 </style>
 
-<?php include "includes/footer.php"; ?>
+<?php include "../includes/footer.php"; ?>

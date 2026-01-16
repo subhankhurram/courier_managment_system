@@ -65,13 +65,17 @@ include "includes/header.php";
     </div>
 </section>
 
+<!-- Bootstrap CSS & Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
 <style>
 .auth-section{
     background: linear-gradient(135deg,#000000,#0f2027);
 }
 
 /* Text */
-.text-gray{color:#b0b0b0}
+.text-gray{color:#b0b0b0;}
 
 /* Feature Cards */
 .feature-card{

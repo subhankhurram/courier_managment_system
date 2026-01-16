@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db   = "courier_management";
+$db   = "courier_managment";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 

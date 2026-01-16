@@ -1,4 +1,5 @@
 <?php
+// Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -30,12 +31,13 @@ body {
 
 /* NAVBAR */
 .navbar {
-    background-color: #111;
+    background-color: rgba(17,17,17,0.95);
+    backdrop-filter: blur(10px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     transition: background-color 0.3s;
 }
 .navbar.sticky-top.scrolled {
-    background-color: #0a0a0a;
+    background-color: rgba(10,10,10,0.95);
 }
 
 .navbar-brand {
@@ -81,14 +83,6 @@ body {
     color: #fff;
 }
 
-/* HERO (optional if needed in header) */
-.hero-dark {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
-    display: flex;
-    align-items: center;
-}
-
 /* RESPONSIVE */
 @media (max-width: 991px) {
     .navbar-nav .nav-link {
@@ -98,13 +92,12 @@ body {
 }
 </style>
 </head>
-
 <body>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top py-3">
   <div class="container">
-    <a class="navbar-brand" href="/courier_managment_system/index.php"> Cargo Nest</a>
+    <a class="navbar-brand" href="/courier_management/index.php">Cargo Nest</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -113,32 +106,39 @@ body {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item">
-          <a class="nav-link" href="/courier_managment_system/index.php">Home</a>
+          <a class="nav-link" href="/courier_management/index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/courier_managment_system/features.php">Features</a>
+          <a class="nav-link" href="/courier_management/features.php">Features</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/courier_managment_system/services.php">Services</a>
+          <a class="nav-link" href="/courier_management/services.php">Services</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/courier_managment_system/testimonials.php">Testimonials</a>
+          <a class="nav-link" href="/courier_management/testimonials.php">Testimonials</a>
         </li>
-        <li class="nav-item ms-lg-3">
-          <a href="/courier_managment_system/auth/register.php" class="btn btn-accent">Sign Up</a>
-        </li>
-        <li class="nav-item ms-2">
-          <a href="/courier_managment_system/auth/login.php" class="btn btn-outline-light">Login</a>
-        </li>
-        <li class="nav-item ms-2">
-          <a href="/courier_managment_system/auth/logout.php" class="btn btn-outline-light">Logout</a>
-        </li>
+
+        <?php if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true): ?>
+            <!-- User NOT logged in -->
+            <li class="nav-item ms-lg-3">
+              <a href="/courier_management/auth/register.php" class="btn btn-accent">Sign Up</a>
+            </li>
+            <li class="nav-item ms-2">
+              <a href="/courier_management/auth/login.php" class="btn btn-outline-light">Login</a>
+            </li>
+        <?php else: ?>
+            <!-- User IS logged in -->
+            <li class="nav-item ms-2">
+              <a href="/courier_management/auth/logout.php" class="btn btn-outline-light">Logout</a>
+            </li>
+        <?php endif; ?>
+
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Optional: Sticky Navbar Scroll Effect -->
+<!-- Sticky Navbar Scroll Effect -->
 <script>
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
