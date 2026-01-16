@@ -1,6 +1,7 @@
 <?php
-include "../includes/auth_check.php";
-include "../includes/header.php";
+// Include authentication and header
+require_once __DIR__ . "/includes/auth_check.php";
+require_once __DIR__ . "/includes/header.php";
 ?>
 
 <section class="auth-section py-5" style="min-height:85vh;">
@@ -69,8 +70,6 @@ include "../includes/header.php";
 .auth-section{
     background: linear-gradient(135deg,#000000,#0f2027);
 }
-
-/* Text */
 .text-gray{color:#b0b0b0}
 
 /* Service Cards */
@@ -131,15 +130,8 @@ include "../includes/header.php";
 .icon-circle.danger{background:#dc3545;}
 
 /* Card Text */
-.service-card h5{
-    font-weight:700;
-    margin-bottom:8px;
-    color:#fff;
-}
-.service-card p{
-    font-size:14px;
-    color:#b0b0b0;
-}
+.service-card h5{font-weight:700;margin-bottom:8px;color:#fff;}
+.service-card p{font-size:14px;color:#b0b0b0;}
 
 /* Responsive */
 @media(max-width:768px){
@@ -147,4 +139,7 @@ include "../includes/header.php";
 }
 </style>
 
-<?php include "../includes/footer.php"; ?>
+<?php
+// Include footer
+require_once __DIR__ . "/includes/footer.php";
+?>
