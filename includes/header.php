@@ -106,32 +106,42 @@ body {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item">
-          <a class="nav-link" href="/courier_management/index.php">Home</a>
+          <a class="nav-link" href="/courier_managment_system/index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/courier_management/features.php">Features</a>
+          <a class="nav-link" href="/courier_managment_system/features.php">Features</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/courier_management/services.php">Services</a>
+          <a class="nav-link" href="/courier_managment_system/services.php">Services</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/courier_management/testimonials.php">Testimonials</a>
+          <a class="nav-link" href="/courier_managment_system/testimonials.php">Testimonials</a>
         </li>
 
-        <?php if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true): ?>
-            <!-- User NOT logged in -->
-            <li class="nav-item ms-lg-3">
-              <a href="/courier_management/auth/register.php" class="btn btn-accent">Sign Up</a>
-            </li>
-            <li class="nav-item ms-2">
-              <a href="/courier_management/auth/login.php" class="btn btn-outline-light">Login</a>
-            </li>
-        <?php else: ?>
-            <!-- User IS logged in -->
-            <li class="nav-item ms-2">
-              <a href="/courier_management/auth/logout.php" class="btn btn-outline-light">Logout</a>
-            </li>
-        <?php endif; ?>
+        <?php if(!isset($_SESSION['user_id'])): ?>
+    <!-- User NOT logged in -->
+    <li class="nav-item ms-lg-3">
+        <a href="/courier_managment_system/auth/register.php"
+           class="btn btn-accent">
+           Sign Up
+        </a>
+    </li>
+    <li class="nav-item ms-2">
+        <a href="/courier_managment_system/auth/login.php"
+           class="btn btn-outline-light">
+           Login
+        </a>
+    </li>
+<?php else: ?>
+    <!-- User IS logged in -->
+    <li class="nav-item ms-2">
+        <a href="/courier_managment_system/auth/logout.php"
+           class="btn btn-outline-light">
+           Logout
+        </a>
+    </li>
+<?php endif; ?>
+
 
       </ul>
     </div>
