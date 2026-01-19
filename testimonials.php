@@ -2,72 +2,56 @@
 // ====================
 // INCLUDE AUTH AND HEADER
 // ====================
-require_once __DIR__ . "/includes/auth_check.php";
+// require_once __DIR__ . "/includes/auth_check.php";
 require_once __DIR__ . "/includes/header.php";
 ?>
 
-<!-- ====================
-     TESTIMONIALS SECTION
-==================== -->
 <section class="auth-section py-5" style="min-height:85vh;">
     <div class="container text-center">
 
         <!-- Heading -->
         <h2 class="fw-bold text-white mb-3">💬 Testimonials</h2>
-        <p class="text-gray mb-5">Hear from our satisfied customers and partners</p>
+        <p class="text-gray mb-5"></p>
 
-        <!-- Carousel -->
-        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
+        <!-- Testimonial Cards -->
+        <div class="row g-4 justify-content-center">
 
-                <div class="carousel-item active">
-                    <div class="testimonial-card accent mx-auto">
-                        <div class="icon-circle"><i class="bi bi-person-circle"></i></div>
-                        <h5>John Doe</h5>
-                        <p>"Fast and reliable courier service! Highly recommended."</p>
-                    </div>
+            <div class="col-md-4">
+                <div class="testimonial-card accent mx-auto">
+                    <div class="icon-circle"><i class="bi bi-person-circle"></i></div>
+                    <h5>John Doe</h5>
+                    <p>"Fast and reliable courier service! Highly recommended."</p>
                 </div>
-
-                <div class="carousel-item">
-                    <div class="testimonial-card info mx-auto">
-                        <div class="icon-circle"><i class="bi bi-person-circle"></i></div>
-                        <h5>Jane Smith</h5>
-                        <p>"Amazing support from agents and smooth shipment tracking."</p>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="testimonial-card success mx-auto">
-                        <div class="icon-circle"><i class="bi bi-person-circle"></i></div>
-                        <h5>Ali Khan</h5>
-                        <p>"Billing and reports are so easy to generate. Love this system!"</p>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="testimonial-card danger mx-auto">
-                        <div class="icon-circle"><i class="bi bi-person-circle"></i></div>
-                        <h5>Sarah Lee</h5>
-                        <p>"Customer support is top-notch. All my shipments delivered safely."</p>
-                    </div>
-                </div>
-
             </div>
 
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
+            <div class="col-md-4">
+                <div class="testimonial-card info mx-auto">
+                    <div class="icon-circle"><i class="bi bi-person-circle"></i></div>
+                    <h5>Jane Smith</h5>
+                    <p>"Amazing support from agents and smooth shipment tracking."</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="testimonial-card success mx-auto">
+                    <div class="icon-circle"><i class="bi bi-person-circle"></i></div>
+                    <h5>Ali Khan</h5>
+                    <p>"Billing and reports are so easy to generate. Love this system!"</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="testimonial-card danger mx-auto">
+                    <div class="icon-circle"><i class="bi bi-person-circle"></i></div>
+                    <h5>Sarah Lee</h5>
+                    <p>"Customer support is top-notch. All shipments delivered safely."</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- ====================
-     CUSTOM CSS
-==================== -->
 <style>
 .auth-section{
     background: linear-gradient(135deg,#000000,#0f2027);
@@ -87,6 +71,7 @@ require_once __DIR__ . "/includes/header.php";
 }
 .testimonial-card:hover{
     transform:translateY(-8px) scale(1.03);
+    box-shadow:0 0 30px rgba(255,75,43,.4);
 }
 
 /* Icon Circle */
@@ -108,12 +93,15 @@ require_once __DIR__ . "/includes/header.php";
 .testimonial-card.danger .icon-circle{background:#dc3545;}
 
 /* Text */
-.testimonial-card h5{color:#fff;font-weight:700;}
-.testimonial-card p{color:#b0b0b0;font-size:14px;}
-
-/* Carousel Controls */
-.carousel-control-prev-icon,
-.carousel-control-next-icon{filter:invert(1);}
+.testimonial-card h5{
+    color:#fff;
+    font-weight:700;
+    margin-bottom:8px;
+}
+.testimonial-card p{
+    color:#b0b0b0;
+    font-size:14px;
+}
 </style>
 
 <?php
