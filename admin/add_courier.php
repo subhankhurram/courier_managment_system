@@ -63,7 +63,7 @@ if (isset($_POST['add_courier'])) {
             <p class="text-gray mb-0">Create courier booking</p>
         </div>
 
-        <form method="POST" class="floating-form">
+        <form method="POST" class="floating-form" id="addCourierForm">
 
             <div class="form-floating mb-3">
                 <select name="sender_id"
@@ -80,6 +80,7 @@ if (isset($_POST['add_courier'])) {
                     ?>
                 </select>
                 <label for="sender">Sender (Customer)</label>
+                <small class="text-danger" id="senderError"></small>
             </div>
 
             <div class="form-floating mb-3">
@@ -87,6 +88,7 @@ if (isset($_POST['add_courier'])) {
                        class="form-control bg-dark text-white border-0"
                        id="receiver_name" placeholder="Receiver Name" required>
                 <label for="receiver_name">Receiver Name</label>
+                <small class="text-danger" id="receiverNameError"></small>
             </div>
 
             <div class="form-floating mb-3">
@@ -94,6 +96,7 @@ if (isset($_POST['add_courier'])) {
                        class="form-control bg-dark text-white border-0"
                        id="receiver_phone" placeholder="Receiver Phone" required>
                 <label for="receiver_phone">Receiver Phone</label>
+                <small class="text-danger" id="receiverPhoneError"></small>
             </div>
 
             <div class="form-floating mb-3">
@@ -103,6 +106,7 @@ if (isset($_POST['add_courier'])) {
                           placeholder="Receiver Address"
                           style="height:90px" required></textarea>
                 <label for="receiver_address">Receiver Address</label>
+                <small class="text-danger" id="receiverAddressError"></small>
             </div>
 
             <div class="form-floating mb-3">
@@ -110,6 +114,7 @@ if (isset($_POST['add_courier'])) {
                        class="form-control bg-dark text-white border-0"
                        id="courier_type" placeholder="Courier Type" required>
                 <label for="courier_type">Courier Type</label>
+                <small class="text-danger" id="courierTypeError"></small>
             </div>
 
             <div class="form-floating mb-3">
@@ -117,6 +122,7 @@ if (isset($_POST['add_courier'])) {
                        class="form-control bg-dark text-white border-0"
                        id="courier_company" placeholder="Courier Company" required>
                 <label for="courier_company">Courier Company</label>
+                <small class="text-danger" id="courierCompanyError"></small>
             </div>
 
             <div class="form-floating mb-4">
@@ -124,6 +130,7 @@ if (isset($_POST['add_courier'])) {
                        class="form-control bg-dark text-white border-0"
                        id="expected_delivery" required>
                 <label for="expected_delivery">Expected Delivery</label>
+                <small class="text-danger" id="expectedDeliveryError"></small>
             </div>
 
             <button name="add_courier" class="btn btn-accent w-100 py-2 fw-bold">
@@ -213,3 +220,67 @@ if (isset($_POST['add_courier'])) {
     border:2px solid #ff4b2b;
 }
 </style>
+
+<script>
+// Courier Form Validation
+document.getElementById("addCourierForm").addEventListener("submit", function(e){
+    let valid = true;
+
+    // Clear previous errors
+    ["sender","receiver_name","receiver_phone","receiver_address","courier_type","courier_company","expected_delivery"]
+        .forEach(id=>{
+            document.getElementById(id+"Error").innerText = "";
+        });
+
+    // Sender selected
+    const sender = document.getElementById("sender").value;
+    if(!sender){
+        document.getElementById("senderError").innerText = "Please select a customer.";
+        valid = false;
+    }
+
+    // Receiver Name: letters & spaces
+    const receiverName = document.getElementById("receiver_name").value.trim();
+    if(!/^[A-Za-z\s]{2,50}$/.test(receiverName)){
+        document.getElementById("receiverNameError").innerText = "Only letters allowed (2-50 chars).";
+        valid = false;
+    }
+
+    // Receiver Phone: digits 10-15
+    const receiverPhone = document.getElementById("receiver_phone").value.trim();
+    if(!/^\d{10,15}$/.test(receiverPhone)){
+        document.getElementById("receiverPhoneError").innerText = "Phone should be 10-15 digits.";
+        valid = false;
+    }
+
+    // Receiver Address: min 5 chars
+    const receiverAddress = document.getElementById("receiver_address").value.trim();
+    if(receiverAddress.length < 5){
+        document.getElementById("receiverAddressError").innerText = "Address must be at least 5 characters.";
+        valid = false;
+    }
+
+    // Courier Type: letters & spaces
+    const courierType = document.getElementById("courier_type").value.trim();
+    if(!/^[A-Za-z\s]{2,50}$/.test(courierType)){
+        document.getElementById("courierTypeError").innerText = "Only letters allowed (2-50 chars).";
+        valid = false;
+    }
+
+    // Courier Company: letters & spaces
+    const courierCompany = document.getElementById("courier_company").value.trim();
+    if(!/^[A-Za-z\s]{2,50}$/.test(courierCompany)){
+        document.getElementById("courierCompanyError").innerText = "Only letters allowed (2-50 chars).";
+        valid = false;
+    }
+
+    // Expected Delivery: not empty
+    const expectedDelivery = document.getElementById("expected_delivery").value;
+    if(!expectedDelivery){
+        document.getElementById("expectedDeliveryError").innerText = "Please select a delivery date.";
+        valid = false;
+    }
+
+    if(!valid) e.preventDefault();
+});
+</script>

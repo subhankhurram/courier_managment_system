@@ -9,7 +9,7 @@
 
             <!-- Company Info -->
             <div class="col-md-6 mb-4 mb-md-0">
-                <h5 class="fw-bold text-accent">🚚 Cargo Nest</h5>
+                <h5 class="fw-bold text-accent"> Cargo Nest</h5>
                 <p style="color:#b0b0b0; opacity:0.85;">
                 cargo nest management platform. Send, track, and manage parcels easily with our secure system.
                 </p>

@@ -71,39 +71,45 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 
     <form method="POST" action="../actions/courier_action.php"
           class="glass p-5 rounded-4"
-          style="max-width:650px;margin:auto;">
+          style="max-width:650px;margin:auto;"
+          id="updateCourierForm">
 
         <input type="hidden" name="courier_id" value="<?= $row['courier_id'] ?>">
 
         <div class="mb-3">
             <label class="form-label text-accent fw-semibold">Receiver Name</label>
             <input type="text" class="form-control form-control-lg dark-input"
-                   name="receiver_name"
+                   name="receiver_name" id="receiver_name"
                    value="<?= htmlspecialchars($row['receiver_name']) ?>" required>
+            <small class="text-danger" id="receiverNameError"></small>
         </div>
 
         <div class="mb-3">
             <label class="form-label text-accent fw-semibold">Receiver Phone</label>
             <input type="text" class="form-control form-control-lg dark-input"
-                   name="receiver_phone"
+                   name="receiver_phone" id="receiver_phone"
                    value="<?= htmlspecialchars($row['receiver_phone']) ?>" required>
+            <small class="text-danger" id="receiverPhoneError"></small>
         </div>
 
         <div class="mb-3">
             <label class="form-label text-accent fw-semibold">Receiver Address</label>
             <textarea class="form-control form-control-lg dark-input"
-                      name="receiver_address" rows="3" required><?= 
+                      name="receiver_address" id="receiver_address"
+                      rows="3" required><?= 
                 htmlspecialchars($row['receiver_address']) 
             ?></textarea>
+            <small class="text-danger" id="receiverAddressError"></small>
         </div>
 
         <div class="mb-4">
             <label class="form-label text-accent fw-semibold">Status</label>
-            <select class="form-select form-select-lg dark-input" name="status">
+            <select class="form-select form-select-lg dark-input" name="status" id="status">
                 <option value="BOOKED" <?= $row['status']=='BOOKED'?'selected':'' ?>>BOOKED</option>
                 <option value="IN_TRANSIT" <?= $row['status']=='IN_TRANSIT'?'selected':'' ?>>IN TRANSIT</option>
                 <option value="DELIVERED" <?= $row['status']=='DELIVERED'?'selected':'' ?>>DELIVERED</option>
             </select>
+            <small class="text-danger" id="statusError"></small>
         </div>
 
         <div class="text-center">
@@ -175,3 +181,47 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     box-shadow:0 0 25px rgba(255,75,43,.5);
     border-radius:16px;
     padding:12px;
+}
+</style>
+
+<script>
+// Update Courier Form Validation
+document.getElementById("updateCourierForm").addEventListener("submit", function(e){
+    let valid = true;
+
+    // Clear previous errors
+    ["receiver_name","receiver_phone","receiver_address","status"].forEach(id=>{
+        document.getElementById(id+"Error").innerText = "";
+    });
+
+    // Receiver Name: letters & spaces only
+    const name = document.getElementById("receiver_name").value.trim();
+    if(!/^[A-Za-z\s]{2,50}$/.test(name)){
+        document.getElementById("receiverNameError").innerText = "Name should be 2-50 letters only.";
+        valid = false;
+    }
+
+    // Receiver Phone: digits 10-15
+    const phone = document.getElementById("receiver_phone").value.trim();
+    if(!/^\d{10,15}$/.test(phone)){
+        document.getElementById("receiverPhoneError").innerText = "Phone must be 10-15 digits.";
+        valid = false;
+    }
+
+    // Receiver Address: min 5 chars
+    const address = document.getElementById("receiver_address").value.trim();
+    if(address.length < 5){
+        document.getElementById("receiverAddressError").innerText = "Address must be at least 5 characters.";
+        valid = false;
+    }
+
+    // Status: must be selected
+    const status = document.getElementById("status").value;
+    if(!status){
+        document.getElementById("statusError").innerText = "Please select a status.";
+        valid = false;
+    }
+
+    if(!valid) e.preventDefault();
+});
+</script>

@@ -1,5 +1,5 @@
 <?php
-// include "includes/auth_check.php";
+// include "includes/auth_check.php"; // uncomment when auth needed
 include "includes/header.php";
 ?>
 
@@ -7,15 +7,17 @@ include "includes/header.php";
     <div class="container text-center">
 
         <!-- Hero -->
-        <h2 class="fw-bold text-white mb-3">🚀 Our features </h2>
-        <p class="text-gray mb-5">.</p>
+        <h2 class="fw-bold text-white mb-3">🚀 Our Features</h2>
+        <p class="text-gray mb-5"></p>
 
         <!-- Feature Cards -->
         <div class="row g-4 justify-content-center">
 
             <div class="col-md-3">
                 <div class="feature-card">
-                    <div class="icon-circle accent"><i class="bi bi-plus-circle"></i></div>
+                    <div class="icon-circle accent">
+                        <i class="bi bi-plus-circle"></i>
+                    </div>
                     <h5>Add Shipment</h5>
                     <p>Create new courier entries</p>
                 </div>
@@ -23,7 +25,9 @@ include "includes/header.php";
 
             <div class="col-md-3">
                 <div class="feature-card">
-                    <div class="icon-circle info"><i class="bi bi-kanban"></i></div>
+                    <div class="icon-circle info">
+                        <i class="bi bi-kanban"></i>
+                    </div>
                     <h5>Manage Shipments</h5>
                     <p>View, update, or delete shipments</p>
                 </div>
@@ -31,7 +35,9 @@ include "includes/header.php";
 
             <div class="col-md-3">
                 <div class="feature-card">
-                    <div class="icon-circle success"><i class="bi bi-people"></i></div>
+                    <div class="icon-circle success">
+                        <i class="bi bi-people"></i>
+                    </div>
                     <h5>Customers</h5>
                     <p>Manage customers & contact info</p>
                 </div>
@@ -39,7 +45,9 @@ include "includes/header.php";
 
             <div class="col-md-3">
                 <div class="feature-card">
-                    <div class="icon-circle danger"><i class="bi bi-cash-stack"></i></div>
+                    <div class="icon-circle danger">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
                     <h5>Billing</h5>
                     <p>Generate and manage bills</p>
                 </div>
@@ -47,7 +55,9 @@ include "includes/header.php";
 
             <div class="col-md-3">
                 <div class="feature-card">
-                    <div class="icon-circle accent"><i class="bi bi-bar-chart"></i></div>
+                    <div class="icon-circle accent">
+                        <i class="bi bi-bar-chart"></i>
+                    </div>
                     <h5>Reports</h5>
                     <p>View analytics and reports</p>
                 </div>
@@ -55,7 +65,9 @@ include "includes/header.php";
 
             <div class="col-md-3">
                 <div class="feature-card">
-                    <div class="icon-circle success"><i class="bi bi-person-badge"></i></div>
+                    <div class="icon-circle success">
+                        <i class="bi bi-person-badge"></i>
+                    </div>
                     <h5>Agents</h5>
                     <p>Manage system agents</p>
                 </div>
@@ -65,17 +77,19 @@ include "includes/header.php";
     </div>
 </section>
 
-<!-- Bootstrap CSS & Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons (CSS should already be in header.php) -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
+/* Background */
 .auth-section{
     background: linear-gradient(135deg,#000000,#0f2027);
 }
 
 /* Text */
-.text-gray{color:#b0b0b0;}
+.text-gray{
+    color:#b0b0b0;
+}
 
 /* Feature Cards */
 .feature-card{
@@ -84,10 +98,9 @@ include "includes/header.php";
     border-radius:20px;
     padding:25px;
     color:#fff;
-    transition: 0.3s;
     text-align:center;
     border:1px solid rgba(255,255,255,0.1);
-    cursor:pointer;
+    transition:0.3s ease;
 }
 .feature-card:hover{
     transform: translateY(-8px) scale(1.03);
@@ -105,16 +118,27 @@ include "includes/header.php";
     justify-content:center;
     font-size:30px;
 }
-.icon-circle.accent{background:#ff4b2b; box-shadow:0 0 25px rgba(255,75,43,.6);}
-.icon-circle.success{background:#22c55e; box-shadow:0 0 25px rgba(34,197,94,.6);}
-.icon-circle.info{background:#0dcaf0; box-shadow:0 0 25px rgba(13,202,240,.6);}
-.icon-circle.danger{background:#dc3545; box-shadow:0 0 25px rgba(220,53,69,.6);}
+.icon-circle.accent{
+    background:#ff4b2b;
+    box-shadow:0 0 25px rgba(255,75,43,.6);
+}
+.icon-circle.success{
+    background:#22c55e;
+    box-shadow:0 0 25px rgba(34,197,94,.6);
+}
+.icon-circle.info{
+    background:#0dcaf0;
+    box-shadow:0 0 25px rgba(13,202,240,.6);
+}
+.icon-circle.danger{
+    background:#dc3545;
+    box-shadow:0 0 25px rgba(220,53,69,.6);
+}
 
 /* Card Text */
 .feature-card h5{
     font-weight:700;
     margin-bottom:8px;
-    color:#fff;
 }
 .feature-card p{
     font-size:14px;
@@ -122,8 +146,12 @@ include "includes/header.php";
 }
 
 /* Responsive */
-@media(max-width:768px){
-    .icon-circle{width:60px;height:60px;font-size:26px;}
+@media (max-width:768px){
+    .icon-circle{
+        width:60px;
+        height:60px;
+        font-size:26px;
+    }
 }
 </style>
 

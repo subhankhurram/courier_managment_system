@@ -16,13 +16,15 @@ include "../includes/header.php";
 
         <form method="POST"
               action="../actions/customer_action.php"
-              class="floating-form">
+              class="floating-form"
+              id="addCustomerForm">
 
             <div class="form-floating mb-3">
                 <input type="text" name="name"
                        class="form-control bg-dark text-white border-0"
                        id="name" placeholder="Customer Name" required>
                 <label for="name">Customer Name</label>
+                <small class="text-danger" id="nameError"></small>
             </div>
 
             <div class="form-floating mb-3">
@@ -30,6 +32,7 @@ include "../includes/header.php";
                        class="form-control bg-dark text-white border-0"
                        id="phone" placeholder="Phone Number" required>
                 <label for="phone">Phone Number</label>
+                <small class="text-danger" id="phoneError"></small>
             </div>
 
             <div class="form-floating mb-3">
@@ -37,6 +40,7 @@ include "../includes/header.php";
                        class="form-control bg-dark text-white border-0"
                        id="email" placeholder="Email Address">
                 <label for="email">Email Address</label>
+                <small class="text-danger" id="emailError"></small>
             </div>
 
             <div class="form-floating mb-4">
@@ -46,6 +50,7 @@ include "../includes/header.php";
                           placeholder="Full Address"
                           style="height:90px"></textarea>
                 <label for="address">Address</label>
+                <small class="text-danger" id="addressError"></small>
             </div>
 
             <button name="add_customer"
@@ -121,3 +126,45 @@ include "../includes/header.php";
     box-shadow:0 0 20px rgba(255,75,43,.6);
 }
 </style>
+
+<script>
+// Customer Form Validation
+document.getElementById("addCustomerForm").addEventListener("submit", function(e){
+    let valid = true;
+
+    // Clear previous errors
+    ["name","phone","email","address"].forEach(id=>{
+        document.getElementById(id+"Error").innerText = "";
+    });
+
+    // Name: letters & spaces only
+    const name = document.getElementById("name").value.trim();
+    if(!/^[A-Za-z\s]{2,50}$/.test(name)){
+        document.getElementById("nameError").innerText = "Name should contain only letters (2-50 chars).";
+        valid = false;
+    }
+
+    // Phone: digits 10-15
+    const phone = document.getElementById("phone").value.trim();
+    if(!/^\d{10,15}$/.test(phone)){
+        document.getElementById("phoneError").innerText = "Phone should be 10-15 digits.";
+        valid = false;
+    }
+
+    // Email: valid format (optional)
+    const email = document.getElementById("email").value.trim();
+    if(email && !/^[\w.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(email)){
+        document.getElementById("emailError").innerText = "Invalid email address.";
+        valid = false;
+    }
+
+    // Address: min 5 chars
+    const address = document.getElementById("address").value.trim();
+    if(address && address.length < 5){
+        document.getElementById("addressError").innerText = "Address must be at least 5 characters.";
+        valid = false;
+    }
+
+    if(!valid) e.preventDefault();
+});
+</script>

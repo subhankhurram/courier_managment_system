@@ -34,7 +34,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'ADMIN') {
             <p class="text-gray mb-0">Create courier billing</p>
         </div>
 
-        <form method="POST" action="billing_action.php" class="floating-form">
+        <form method="POST" action="billing_action.php" class="floating-form" id="generateBillForm">
 
             <div class="form-floating mb-3">
                 <select name="courier_id"
@@ -51,6 +51,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'ADMIN') {
                     ?>
                 </select>
                 <label for="courier">Courier Tracking #</label>
+                <small class="text-danger" id="courierError"></small>
             </div>
 
             <div class="form-floating mb-3">
@@ -58,16 +59,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'ADMIN') {
                        class="form-control bg-dark text-white border-0"
                        id="amount" placeholder="Amount" required>
                 <label for="amount">Amount</label>
+                <small class="text-danger" id="amountError"></small>
             </div>
 
             <div class="form-floating mb-4">
                 <select name="payment_mode"
                         class="form-select bg-dark text-white border-0"
                         id="payment" required>
+                    <option value="">Select Payment Mode</option>
                     <option value="CASH">Cash</option>
                     <option value="ONLINE">Online</option>
                 </select>
                 <label for="payment">Payment Mode</label>
+                <small class="text-danger" id="paymentError"></small>
             </div>
 
             <button name="create_bill"
@@ -155,3 +159,38 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'ADMIN') {
     border:2px solid #ff4b2b;
 }
 </style>
+
+<script>
+// Generate Bill Form Validation
+document.getElementById("generateBillForm").addEventListener("submit", function(e){
+    let valid = true;
+
+    // Clear previous errors
+    ["courier","amount","payment"].forEach(id=>{
+        document.getElementById(id+"Error").innerText = "";
+    });
+
+    // Courier selection
+    const courier = document.getElementById("courier").value;
+    if(!courier){
+        document.getElementById("courierError").innerText = "Please select a courier.";
+        valid = false;
+    }
+
+    // Amount: positive number
+    const amount = document.getElementById("amount").value.trim();
+    if(!/^\d+(\.\d{1,2})?$/.test(amount) || Number(amount) <= 0){
+        document.getElementById("amountError").innerText = "Enter a valid positive amount.";
+        valid = false;
+    }
+
+    // Payment mode
+    const payment = document.getElementById("payment").value;
+    if(!payment){
+        document.getElementById("paymentError").innerText = "Please select a payment mode.";
+        valid = false;
+    }
+
+    if(!valid) e.preventDefault();
+});
+</script>

@@ -108,6 +108,64 @@ if (isset($_POST['register'])) {
 
     </div>
 </section>
+<script>
+document.querySelector("form").addEventListener("submit", function (e) {
+
+    const name     = document.getElementById("name").value.trim();
+    const email    = document.getElementById("email").value.trim();
+    const phone    = document.getElementById("phone").value.trim();
+    const password = document.getElementById("password").value;
+    const city     = document.getElementById("city").value.trim();
+
+    // REGEX PATTERNS
+    const nameRegex     = /^[A-Za-z\s]{3,}$/;
+    const emailRegex    = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const phoneRegex    = /^[0-9]{10,15}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const cityRegex     = /^[A-Za-z\s]{2,}$/;
+
+    // NAME
+    if (!nameRegex.test(name)) {
+        alert("Full Name must be at least 3 letters (only alphabets).");
+        e.preventDefault();
+        return;
+    }
+
+    // EMAIL
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        e.preventDefault();
+        return;
+    }
+
+    // PHONE
+    if (!phoneRegex.test(phone)) {
+        alert("Phone number must be 10–15 digits (numbers only).");
+        e.preventDefault();
+        return;
+    }
+
+    // PASSWORD
+    if (!passwordRegex.test(password)) {
+        alert(
+            "Password must be at least 8 characters and include:\n" +
+            "- 1 Uppercase letter\n" +
+            "- 1 Lowercase letter\n" +
+            "- 1 Number"
+        );
+        e.preventDefault();
+        return;
+    }
+
+    // CITY (OPTIONAL)
+    if (city !== "" && !cityRegex.test(city)) {
+        alert("City name must contain only letters.");
+        e.preventDefault();
+        return;
+    }
+});
+</script>
+
 
 <?php include "../includes/footer.php"; ?>
 

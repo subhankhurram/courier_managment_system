@@ -61,21 +61,51 @@ $del   = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM couriers WHER
         </div>
 
         <!-- ACTIONS -->
-        <div class="action-bar mt-5 d-flex gap-3 justify-content-center flex-wrap">
+       <!-- ACTIONS -->
+<div class="action-bar mt-5 d-flex gap-3 justify-content-center flex-wrap">
 
-            <a href="add_courier.php" class="neo-btn accent">
-                <i class="bi bi-plus-circle"></i> Add Shipment
-            </a>
+<a href="add_agent.php" class="neo-btn accent">
+    <i class="bi bi-person-plus"></i> Add Agent
+</a>
 
-            <a href="manage_courier.php" class="neo-btn info">
-                <i class="bi bi-kanban"></i> Manage Shipments
-            </a>
+<a href="add_customer.php" class="neo-btn accent">
+    <i class="bi bi-person-plus-fill"></i> Add Customer
+</a>
 
-            <a href="reports.php" class="neo-btn success">
-                <i class="bi bi-bar-chart"></i> Reports
-            </a>
+<a href="add_courier.php" class="neo-btn accent">
+    <i class="bi bi-plus-circle"></i> Add Shipment
+</a>
 
-        </div>
+<a href="manage_agents.php" class="neo-btn info">
+    <i class="bi bi-people"></i> Manage Agents
+</a>
+
+<a href="manage_customer.php" class="neo-btn info">
+    <i class="bi bi-people-fill"></i> Manage Customers
+</a>
+
+<a href="manage_courier.php" class="neo-btn info">
+    <i class="bi bi-kanban"></i> Manage Shipments
+</a>
+
+<a href="create_bill.php" class="neo-btn warning">
+    <i class="bi bi-receipt"></i> Create Bill
+</a>
+
+<a href="billing_action.php" class="neo-btn warning">
+    <i class="bi bi-wallet2"></i> Billing Actions
+</a>
+
+<a href="update_courier.php" class="neo-btn success">
+    <i class="bi bi-pencil-square"></i> Update Shipment
+</a>
+
+<a href="reports.php" class="neo-btn success">
+    <i class="bi bi-bar-chart"></i> Reports
+</a>
+
+</div>
+
 
     </div>
 </section>
