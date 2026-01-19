@@ -14,6 +14,18 @@ include "../includes/header.php";
         <p class="text-gray mb-0">View, manage, and delete customer records</p>
     </div>
 
+    <!-- ALERTS -->
+    <?php if(isset($_SESSION['customer_success'])): ?>
+        <div class="alert glow-alert text-center mb-4">
+            <?= $_SESSION['customer_success']; unset($_SESSION['customer_success']); ?>
+        </div>
+    <?php endif; ?>
+    <?php if(isset($_SESSION['customer_error'])): ?>
+        <div class="alert glow-alert-danger text-center mb-4">
+            <?= $_SESSION['customer_error']; unset($_SESSION['customer_error']); ?>
+        </div>
+    <?php endif; ?>
+
     <div class="glass p-4">
 
         <div class="table-responsive">
@@ -96,5 +108,23 @@ include "../includes/header.php";
 .neo-btn:hover{
     transform:scale(1.08);
     box-shadow:0 0 20px rgba(255,255,255,.3);
+}
+
+/* ALERTS */
+.glow-alert{
+    background:#000;
+    color:#ff4b2b;
+    border:2px solid #ff4b2b;
+    border-radius:16px;
+    padding:12px;
+    box-shadow:0 0 25px rgba(255,75,43,.5);
+}
+.glow-alert-danger{
+    background:#000;
+    color:#dc3545;
+    border:2px solid #dc3545;
+    border-radius:16px;
+    padding:12px;
+    box-shadow:0 0 25px rgba(255,75,43,.5);
 }
 </style>
