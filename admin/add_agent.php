@@ -60,7 +60,7 @@ if ($_SESSION['role'] != 'ADMIN') die("Access Denied");
                 <small class="text-danger" id="passwordError"></small>
             </div>
 
-            <button type="submit" class="btn btn-accent w-100 py-2 fw-bold">
+            <button type="submit" class="btn btn-accent w-100 py-2 fw-bold" name = "add_agent">
                 ➕ Add Agent
             </button>
 

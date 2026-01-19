@@ -56,6 +56,7 @@ body {
     color: #ff4b2b;
 }
 
+/* BUTTONS */
 .btn-accent {
     background-color: #ff4b2b;
     color: #fff;
@@ -97,7 +98,7 @@ body {
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top py-3">
   <div class="container">
-    <a class="navbar-brand" href="/courier_management/index.php">Cargo Nest</a>
+    <a class="navbar-brand" href="/courier_managment_system/index.php">Cargo Nest</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -105,6 +106,7 @@ body {
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-lg-center">
+
         <li class="nav-item">
           <a class="nav-link" href="/courier_managment_system/index.php">Home</a>
         </li>
@@ -118,30 +120,27 @@ body {
           <a class="nav-link" href="/courier_managment_system/testimonials.php">Testimonials</a>
         </li>
 
-        <?php if(!isset($_SESSION['user_id'])): ?>
-    <!-- User NOT logged in -->
-    <li class="nav-item ms-lg-3">
-        <a href="/courier_managment_system/auth/register.php"
-           class="btn btn-accent">
-           Sign Up
-        </a>
-    </li>
-    <li class="nav-item ms-2">
-        <a href="/courier_managment_system/auth/login.php"
-           class="btn btn-outline-light">
-           Login
-        </a>
-    </li>
-<?php else: ?>
-    <!-- User IS logged in -->
-    <li class="nav-item ms-2">
-        <a href="/courier_managment_system/auth/logout.php"
-           class="btn btn-outline-light">
-           Logout
-        </a>
-    </li>
-<?php endif; ?>
+        <?php if(isset($_SESSION['user_id']) && $_SESSION['role'] === 'ADMIN'): ?>
+            <!-- Admin Dashboard button -->
+            <li class="nav-item ms-3">
+                <a href="/courier_managment_system/admin/dashboard.php" class="btn btn-accent">Admin Dashboard</a>
+            </li>
+        <?php endif; ?>
 
+        <?php if(!isset($_SESSION['user_id'])): ?>
+            <!-- User NOT logged in -->
+            <li class="nav-item ms-lg-3">
+                <a href="/courier_managment_system/auth/register.php" class="btn btn-accent">Sign Up</a>
+            </li>
+            <li class="nav-item ms-2">
+                <a href="/courier_managment_system/auth/login.php" class="btn btn-outline-light">Login</a>
+            </li>
+        <?php else: ?>
+            <!-- User IS logged in but not admin -->
+            <li class="nav-item ms-2">
+                <a href="/courier_managment_system/auth/logout.php" class="btn btn-outline-light">Logout</a>
+            </li>
+        <?php endif; ?>
 
       </ul>
     </div>
@@ -162,3 +161,5 @@ window.addEventListener('scroll', function() {
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
