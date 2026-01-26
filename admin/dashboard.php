@@ -91,10 +91,10 @@ $del   = mysqli_fetch_row(mysqli_query($conn,"SELECT COUNT(*) FROM couriers WHER
 <a href="create_bill.php" class="neo-btn warning">
     <i class="bi bi-receipt"></i> Create Bill
 </a>
-
+<!-- 
 <a href="billing_action.php" class="neo-btn warning">
     <i class="bi bi-wallet2"></i> Billing Actions
-</a>
+</a> -->
 
 <a href="update_courier.php" class="neo-btn success">
     <i class="bi bi-pencil-square"></i> Update Shipment
